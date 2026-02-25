@@ -325,9 +325,7 @@ function App() {
                         <div className="about-image">
                             <div className="profile-container">
                                 <div className="profile-glow"></div>
-                                <div className="profile-placeholder">
-                                    <i className="fas fa-user"></i>
-                                </div>
+                                <img src="/Foto diri.jpeg" alt="Muhammad Pathih" className="profile-placeholder" />
                             </div>
                             <div className="location-badge">
                                 <i className="fas fa-map-marker-alt"></i>
@@ -458,34 +456,6 @@ function App() {
 
                         <div className="repo-card">
                             <div className="repo-header">
-                                <h3><i className="fas fa-folder"></i> UdinGanteng256</h3>
-                                <a href="https://github.com/UdinGanteng256/UdinGanteng256" target="_blank" rel="noreferrer" className="repo-link">
-                                    <i className="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                            <p>My Git Profile</p>
-                            <div className="repo-footer">
-                                <span className="repo-lang"><i className="fas fa-circle"></i> GitHub Profile</span>
-                                <span className="repo-date">Feb 20, 2026</span>
-                            </div>
-                        </div>
-
-                        <div className="repo-card">
-                            <div className="repo-header">
-                                <h3><i className="fas fa-folder"></i> Matkul-EAi</h3>
-                                <a href="https://github.com/UdinGanteng256/Matkul-EAi" target="_blank" rel="noreferrer" className="repo-link">
-                                    <i className="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                            <p>Tugas Matkul AI</p>
-                            <div className="repo-footer">
-                                <span className="repo-lang"><i className="fas fa-circle" style={{ color: '#b51f29' }}></i> Wolfram</span>
-                                <span className="repo-date">Feb 19, 2026</span>
-                            </div>
-                        </div>
-
-                        <div className="repo-card">
-                            <div className="repo-header">
                                 <h3><i className="fas fa-folder"></i> Rich-in-The-Dungeon-pt-2</h3>
                                 <a href="https://github.com/UdinGanteng256/Rich-in-The-Dungeon-pt-2" target="_blank" rel="noreferrer"
                                     className="repo-link">
@@ -496,34 +466,6 @@ function App() {
                             <div className="repo-footer">
                                 <span className="repo-lang"><i className="fas fa-circle" style={{ color: '#68217a' }}></i> C#</span>
                                 <span className="repo-date">Jan 30, 2026</span>
-                            </div>
-                        </div>
-
-                        <div className="repo-card">
-                            <div className="repo-header">
-                                <h3><i className="fas fa-folder"></i> Cecep-Adventure</h3>
-                                <a href="https://github.com/UdinGanteng256/Cecep-Adventure" target="_blank" rel="noreferrer" className="repo-link">
-                                    <i className="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                            <p>FOR GIMJAM ITB 2026</p>
-                            <div className="repo-footer">
-                                <span className="repo-lang"><i className="fas fa-circle"></i> Game</span>
-                                <span className="repo-date">Jan 22, 2026</span>
-                            </div>
-                        </div>
-
-                        <div className="repo-card">
-                            <div className="repo-header">
-                                <h3><i className="fas fa-folder"></i> Arcane-Survivors</h3>
-                                <a href="https://github.com/UdinGanteng256/Arcane-Survivors" target="_blank" rel="noreferrer" className="repo-link">
-                                    <i className="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                            <p>2D Platformer Game</p>
-                            <div className="repo-footer">
-                                <span className="repo-lang"><i className="fas fa-circle" style={{ color: '#1e1e3f' }}></i> ShaderLab</span>
-                                <span className="repo-date">Dec 8, 2025</span>
                             </div>
                         </div>
 
@@ -570,18 +512,10 @@ function App() {
                 <div className="container">
                     <h2>Our Games</h2>
                     <div className="game-cards">
-                        <div className="game-card">
+                        <a href="https://cecep271.itch.io/ritd" target="_blank" rel="noreferrer" className="game-card">
                             <i className="fas fa-dungeon"></i>
                             <span>Rich in The Dungeon</span>
-                        </div>
-                        <div className="game-card">
-                            <i className="fas fa-dragon"></i>
-                            <span>Arcane Survivors</span>
-                        </div>
-                        <div className="game-card">
-                            <i className="fas fa-sword"></i>
-                            <span>Cecep Adventure</span>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </section>

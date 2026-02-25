@@ -1169,6 +1169,7 @@ section {
     text-align: left;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+    overflow: hidden;
 }
 
 .contact-card:hover {
@@ -1196,6 +1197,7 @@ section {
 .contact-info {
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 
 .contact-label {
@@ -1210,6 +1212,9 @@ section {
     font-size: 14px;
     color: var(--white-90);
     font-weight: 500;
+    word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .contact-cta {
