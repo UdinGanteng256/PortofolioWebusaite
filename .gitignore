@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+
+# Production
+/dist
+/build
+
+# Misc
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Documentation (local development notes)
+UPGRADE-SUMMARY.md
+3D-MODEL-RESOURCES.md
+
+# Large model files (optional - uncomment if you want to exclude models)
+# public/models/*.glb
+# public/models/*.gltf
+
+# Audio files (optional - uncomment if you want to exclude music)
+# *.mp3
