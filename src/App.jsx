@@ -7,6 +7,8 @@ import LogoLoop from './components/LogoLoop';
 import TextCursor from './components/TextCursor';
 import GradualBlur from './components/GradualBlur';
 import TextType from './components/TextType';
+import ModelViewer from './components/ModelViewer';
+import QualityToggle from './components/QualityToggle';
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiNodedotjs, SiPython, SiDocker, SiUnity, SiSharp, SiBlender, SiHtml5, SiCss3 } from 'react-icons/si';
 
 const techLogosFrontend = [
@@ -37,6 +39,9 @@ const techLogosBackend = [
 const usePortfolioLogic = () => {
     useEffect(() => {
         // ---- GSAP Animations (Migrated from script.js) ---- //
+        
+        // Check for reduced motion preference
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         // Initial setup for GSAP
         gsap.set(".nav-links li", { opacity: 0, y: -20 });
@@ -46,33 +51,41 @@ const usePortfolioLogic = () => {
 
         const tl = gsap.timeline();
 
-        // Navbar animation
-        tl.to(".nav-links li", {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            stagger: 0.1,
-            ease: "power2.out"
-        })
-            // Hero content animation
-            .to(".hero-content h1", {
+        // Respect reduced motion preference
+        if (prefersReducedMotion) {
+            gsap.set(".nav-links li", { opacity: 1, y: 0 });
+            gsap.set(".hero-content h1", { opacity: 1, y: 0 });
+            gsap.set(".hero-content p", { opacity: 1, y: 0 });
+            gsap.set(".hero-content .cta-button", { opacity: 1, scale: 1 });
+        } else {
+            // Navbar animation
+            tl.to(".nav-links li", {
                 opacity: 1,
                 y: 0,
-                duration: 0.8,
-                ease: "power3.out"
-            }, "-=0.2")
-            .to(".hero-content p", {
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
-                ease: "power3.out"
-            }, "-=0.6")
-            .to(".hero-content .cta-button", {
-                opacity: 1,
-                scale: 1,
-                duration: 0.8,
-                ease: "back.out(1.7)"
-            }, "-=0.4");
+                duration: 0.5,
+                stagger: 0.1,
+                ease: "power2.out"
+            })
+                // Hero content animation
+                .to(".hero-content h1", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: "power3.out"
+                }, "-=0.2")
+                .to(".hero-content p", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: "power3.out"
+                }, "-=0.6")
+                .to(".hero-content .cta-button", {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.8,
+                    ease: "back.out(1.7)"
+                }, "-=0.4");
+        }
 
         // Intersection Observer for scroll animations
         const observerOptions = {
@@ -283,6 +296,7 @@ function App() {
                     <li><a href="#tech-stack">Tech Stack</a></li>
                     <li><a href="#repositories">Repositories</a></li>
                     <li><a href="#games">Games</a></li>
+                    <li><a href="#models">3D Models</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
                 <div className="hamburger">
@@ -325,7 +339,7 @@ function App() {
                         <div className="about-image">
                             <div className="profile-container">
                                 <div className="profile-glow"></div>
-                                <img src="/Foto diri.jpeg" alt="Muhammad Pathih" className="profile-placeholder" />
+                                <img src="/foto-diri.jpeg" alt="Muhammad Pathih" className="profile-placeholder" />
                             </div>
                             <div className="location-badge">
                                 <i className="fas fa-map-marker-alt"></i>
@@ -520,6 +534,47 @@ function App() {
                 </div>
             </section>
 
+            {/* 3D Models Section */}
+            <section id="models" className="models-section">
+                <div className="container">
+                    <div className="section-header">
+                        <h2>3D Models</h2>
+                        <p className="section-subtitle">Interactive 3D assets & game models</p>
+                    </div>
+                    <div className="models-grid">
+                        <ModelViewer
+                            modelUrl="/models/duck.glb"
+                            title="Classic Duck Model"
+                            description="A classic 3D test model rendered in real-time. Demonstrates PBR materials, lighting, and shadow rendering. Drag to rotate, scroll to zoom."
+                            environment="city"
+                            height="350px"
+                        />
+                        <ModelViewer
+                            modelUrl="/models/sphere.glb"
+                            title="Material Showcase"
+                            description="High-detail 3D model showcasing material variants and surface details. Perfect example of production-ready game assets with optimized topology."
+                            environment="sunset"
+                            height="350px"
+                        />
+                        <ModelViewer
+                            modelUrl="/models/box.glb"
+                            title="Simple Geometry"
+                            description="Clean, low-poly cube demonstrating efficient topology. Perfect example of modular game assets that can be combined to create complex environments."
+                            environment="night"
+                            height="350px"
+                        />
+                    </div>
+                    <div className="models-note">
+                        <i className="fas fa-info-circle"></i>
+                        <p>
+                            <strong>These are free CC0 models</strong> from the <a href="https://github.com/KhronosGroup/glTF-Sample-Models" target="_blank" rel="noreferrer">Khronos Group Sample Models</a>. 
+                            Want to add your own? Export from Blender/Maya as .glb, place in <code>/public/models/</code>, and update the modelUrl prop.
+                            Find more free models at <a href="https://polyhaven.com" target="_blank" rel="noreferrer">Poly Haven</a>, <a href="https://kenney.nl/assets" target="_blank" rel="noreferrer">Kenney.nl</a>, or <a href="https://sketchfab.com" target="_blank" rel="noreferrer">Sketchfab</a>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
             {/* Contact Section */}
             <section id="contact" className="contact-section">
                 <div className="container">
@@ -580,6 +635,9 @@ function App() {
             <footer>
                 <p>&copy; 2024 Aurion. All rights reserved.</p>
             </footer>
+
+            {/* Quality Settings Toggle */}
+            <QualityToggle />
 
             {/* Viewport Bottom Gradual Blur */}
             <GradualBlur
