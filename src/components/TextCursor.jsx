@@ -70,7 +70,7 @@ const TextCursor = ({
                     left: p.x,
                     top: p.y,
                     transform: `translate(-50%, -50%) rotate(${p.angle}rad)`,
-                    color: 'var(--neon-green, #39FF14)',
+                    color: 'var(--teal, #0f766e)',
                     fontWeight: 'bold',
                     fontSize: '1.2rem',
                     fontFamily: 'var(--font-accent, Georgia)',
