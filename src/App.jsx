@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import gsap from "gsap";
-import "swiper/css/bundle";
 import Antigravity from "./components/Antigravity";
 import LogoLoop from "./components/LogoLoop";
-import TextCursor from "./components/TextCursor";
-import TextType from "./components/TextType";
-import ModelViewer from "./components/ModelViewer";
-import QualityToggle from "./components/QualityToggle";
 import Lanyard from "./components/Lanyard";
+import TextType from "./components/TextType";
+import TextCursor from "./components/TextCursor";
+import QualityToggle from "./components/QualityToggle";
+import Terminal from "./components/Terminal";
 import {
   SiReact,
   SiNextdotjs,
@@ -21,33 +20,34 @@ import {
   SiBlender,
   SiHtml5,
   SiCss3,
+  SiGithub,
+  SiInstagram,
 } from "react-icons/si";
+import {
+  Mail,
+  MapPin,
+  ChevronDown,
+  Code,
+  Palette,
+  Wrench,
+  Gamepad2,
+  ArrowRight,
+  ExternalLink,
+  Folder,
+  Calendar,
+  User,
+  Music,
+  Moon,
+  Sun,
+} from "lucide-react";
 
 const techLogosFrontend = [
   { node: <SiReact />, title: "React", href: "https://react.dev" },
   { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
-  {
-    node: <SiTypescript />,
-    title: "TypeScript",
-    href: "https://www.typescriptlang.org",
-  },
-  {
-    node: <SiTailwindcss />,
-    title: "Tailwind CSS",
-    href: "https://tailwindcss.com",
-  },
-  {
-    node: <SiHtml5 />,
-    title: "HTML5",
-    href: "https://developer.mozilla.org/en-US/docs/Web/HTML",
-  },
-  {
-    node: <SiCss3 />,
-    title: "CSS3",
-    href: "https://developer.mozilla.org/en-US/docs/Web/CSS",
-  },
-  { node: <SiReact />, title: "React", href: "https://react.dev" },
-  { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
+  { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
+  { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
+  { node: <SiHtml5 />, title: "HTML5", href: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
+  { node: <SiCss3 />, title: "CSS3", href: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
 ];
 
 const techLogosBackend = [
@@ -55,45 +55,44 @@ const techLogosBackend = [
   { node: <SiPython />, title: "Python", href: "https://www.python.org" },
   { node: <SiDocker />, title: "Docker", href: "https://www.docker.com" },
   { node: <SiUnity />, title: "Unity", href: "https://unity.com" },
-  {
-    node: <SiSharp />,
-    title: "C#",
-    href: "https://learn.microsoft.com/en-us/dotnet/csharp/",
-  },
+  { node: <SiSharp />, title: "C#", href: "https://learn.microsoft.com/en-us/dotnet/csharp/" },
   { node: <SiBlender />, title: "Blender", href: "https://www.blender.org" },
-  { node: <SiNodedotjs />, title: "Node.js", href: "https://nodejs.org" },
-  { node: <SiPython />, title: "Python", href: "https://www.python.org" },
 ];
 
-const PAGE_LABELS = {
-  home: "Home",
-  about: "About",
-  "tech-stack": "Tech Stack",
-  repositories: "Repositories",
-  games: "Games",
-  models: "3D Models",
-  contact: "Contact",
-};
+const expertiseItems = [
+  {
+    icon: Gamepad2,
+    title: "Game Development",
+    description: "Building immersive gaming experiences",
+  },
+  {
+    icon: Code,
+    title: "Full Stack Programming",
+    description: "End-to-end web application development",
+  },
+  {
+    icon: Palette,
+    title: "UI/UX Design",
+    description: "Crafting intuitive, beautiful interfaces",
+  },
+  {
+    icon: Wrench,
+    title: "Creative Tools",
+    description: "Proficient in industry-standard tools",
+  },
+];
 
-const PAGES = Object.keys(PAGE_LABELS);
-
-/* =========================================
-   Home Page — Hero / Welcome
-   ========================================= */
 function HomePage({ onGetInTouch }) {
   return (
     <section className="page-section hero-section">
-      {/* Decorative visual layer */}
-      <div className="hero-deco" aria-hidden="true">
-        <div className="hero-ring hero-ring-1" />
-        <div className="hero-ring hero-ring-2" />
-        <div className="hero-ring hero-ring-3" />
-        <div className="hero-corner hero-corner-tl" />
-        <div className="hero-corner hero-corner-tr" />
-        <div className="hero-corner hero-corner-bl" />
-        <div className="hero-corner hero-corner-br" />
-        <div className="hero-scanlines" />
-        <div className="hero-dot-grid" />
+      <div style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", zIndex: -10, pointerEvents: "none" }}>
+        <Antigravity
+          color={["#FF0000", "#FFFF00", "#00FF00", "#0000FF"]}
+          count={2000}
+          particleSize={0.2}
+          particleVariance={1.2}
+          waveAmplitude={2.2}
+        />
       </div>
 
       <div className="hero-content">
@@ -103,27 +102,25 @@ function HomePage({ onGetInTouch }) {
           <span className="hero-role-bracket">]</span>
         </p>
         <h1>
-          <span className="text-mask">
-            <TextType
-              typingSpeed={72}
-              pauseDuration={1600}
-              showCursor
-              cursorCharacter="_"
-              texts={[
-                "Welcome",
-                "this my portfolio👋🏻",
-                "Step to another world",
-              ]}
-              deletingSpeed={45}
-              variableSpeedEnabled={false}
-              variableSpeedMin={60}
-              variableSpeedMax={120}
-              cursorBlinkDuration={0.5}
-            />
-          </span>
+          <TextType
+            typingSpeed={72}
+            pauseDuration={1600}
+            showCursor
+            cursorCharacter="_"
+            texts={[
+              "Welcome",
+              "to my portfolio👋🏻",
+              "Step to another world",
+            ]}
+            deletingSpeed={45}
+            variableSpeedEnabled={false}
+            variableSpeedMin={60}
+            variableSpeedMax={120}
+            cursorBlinkDuration={0.5}
+          />
         </h1>
         <p className="hero-tagline">
-          Explore the universe of adventure and fantasy
+          Crafting digital experiences that bridge technology and creativity
         </p>
         <div className="hero-actions">
           <button className="cta-button" onClick={onGetInTouch}>
@@ -131,7 +128,7 @@ function HomePage({ onGetInTouch }) {
           </button>
           <div className="hero-scroll-hint">
             <span>scroll to explore</span>
-            <i className="fas fa-chevron-down"></i>
+            <ChevronDown size={14} />
           </div>
         </div>
       </div>
@@ -139,10 +136,7 @@ function HomePage({ onGetInTouch }) {
   );
 }
 
-/* =========================================
-   About Page — About Me
-   ========================================= */
-function AboutPage() {
+function AboutPage({ isDarkMode }) {
   return (
     <section className="page-section about-section">
       <div className="container">
@@ -152,9 +146,9 @@ function AboutPage() {
             Game Developer &amp; Full Stack Programmer
           </p>
         </div>
+
         <div className="about-content">
           <div className="about-image">
-            {/* Interactive Lanyard Canvas sits in the left column */}
             <div
               className="lanyard-container"
               style={{
@@ -165,23 +159,22 @@ function AboutPage() {
                 overflow: "visible",
               }}
             >
-              <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} fov={25} />
+              <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} fov={25} isDarkMode={isDarkMode} />
             </div>
-            <div
-              className="location-badge"
-              style={{ marginTop: "-20px", position: "relative", zIndex: 2 }}
-            >
-              <i className="fas fa-map-marker-alt"></i>
+            <div className="location-badge">
+              <MapPin size={16} />
               <span>Jakarta Timur</span>
             </div>
           </div>
+
           <div className="about-text">
             <div className="about-intro">
-              <h3>Muhammad Pathih</h3>
+              <h3>Muhammad Pathih Bataviant</h3>
               <p className="role-badge">
                 Student at Politeknik Negeri Media Kreatif — Game Technology
               </p>
             </div>
+
             <div className="about-description">
               <p>
                 I'm passionate about{" "}
@@ -195,44 +188,25 @@ function AboutPage() {
               </p>
               <p>
                 When I'm not designing interfaces or building games, you'll find
-                me{" "}
-                <span className="highlight-alt">
-                  experimenting in the kitchen
-                </span>
-                , <span className="highlight-alt">training at the gym</span>, or
-                exploring the latest in tech and design.
+                me experimenting in the kitchen, training at the gym, or exploring
+                the latest in tech and design.
               </p>
             </div>
+
             <div className="about-expertise">
-              <div className="expertise-item">
-                <span className="expertise-icon">🎮</span>
-                <div className="expertise-info">
-                  <h4>Game Development</h4>
-                  <p>Building immersive gaming experiences</p>
+              {expertiseItems.map((item, index) => (
+                <div className="expertise-item" key={index}>
+                  <div className="expertise-icon">
+                    <item.icon size={24} strokeWidth={1.5} />
+                  </div>
+                  <div className="expertise-info">
+                    <h4>{item.title}</h4>
+                    <p>{item.description}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="expertise-item">
-                <span className="expertise-icon">💻</span>
-                <div className="expertise-info">
-                  <h4>Full Stack Programming</h4>
-                  <p>End-to-end web application development</p>
-                </div>
-              </div>
-              <div className="expertise-item">
-                <span className="expertise-icon">🎨</span>
-                <div className="expertise-info">
-                  <h4>UI/UX Design</h4>
-                  <p>Crafting intuitive, beautiful interfaces</p>
-                </div>
-              </div>
-              <div className="expertise-item">
-                <span className="expertise-icon">🛠️</span>
-                <div className="expertise-info">
-                  <h4>Creative Tools</h4>
-                  <p>Proficient in industry-standard tools</p>
-                </div>
-              </div>
+              ))}
             </div>
+
             <div className="social-links">
               <a
                 href="https://github.com/UdinGanteng256"
@@ -241,7 +215,7 @@ function AboutPage() {
                 className="social-link"
                 title="GitHub"
               >
-                <i className="fab fa-github"></i>
+                <SiGithub size={20} />
               </a>
               <a
                 href="https://instagram.com/fortune.tihh"
@@ -250,25 +224,17 @@ function AboutPage() {
                 className="social-link"
                 title="Instagram"
               >
-                <i className="fab fa-instagram"></i>
+                <SiInstagram size={20} />
               </a>
               <a
                 href="mailto:muhammadpathih@gmail.com"
                 className="social-link"
                 title="Email"
               >
-                <i className="fas fa-envelope"></i>
-              </a>
-              <a
-                href="tel:+6281292520891"
-                className="social-link"
-                title="Phone"
-              >
-                <i className="fas fa-phone"></i>
+                <Mail size={20} />
               </a>
             </div>
 
-            {/* Stats Row */}
             <div className="about-stats">
               <div className="stat-item">
                 <span className="stat-num">
@@ -298,19 +264,17 @@ function AboutPage() {
   );
 }
 
-/* =========================================
-   Tech Stack Page
-   ========================================= */
-function TechStackPage() {
+function TechStackPage({ isDarkMode }) {
+  const fadeColor = isDarkMode ? "#000000" : "#fdf6e3";
   return (
     <section className="page-section tech-stack-section">
       <div className="container">
-        <h2>Tech Stack</h2>
-        <p className="section-desc">Technologies I work with</p>
-        <div
-          className="tech-grid"
-          style={{ display: "block", overflow: "hidden", padding: "40px 0" }}
-        >
+        <div className="section-header">
+          <h2>Tech Stack</h2>
+          <p className="section-desc">Technologies I work with</p>
+        </div>
+
+        <div style={{ display: "block", overflow: "hidden", padding: "40px 0" }}>
           <LogoLoop
             logos={techLogosFrontend}
             speed={25}
@@ -320,7 +284,7 @@ function TechStackPage() {
             hoverSpeed={0}
             scaleOnHover
             fadeOut
-            fadeOutColor="#fdf6e3"
+            fadeOutColor={fadeColor}
             ariaLabel="Frontend tech stack"
           />
           <div style={{ height: "50px" }} />
@@ -333,270 +297,33 @@ function TechStackPage() {
             hoverSpeed={0}
             scaleOnHover
             fadeOut
-            fadeOutColor="#fdf6e3"
+            fadeOutColor={fadeColor}
             ariaLabel="Backend and architecture tech stack"
           />
         </div>
-      </div>
-    </section>
-  );
-}
 
-/* =========================================
-   Repositories Page
-   ========================================= */
-function RepositoriesPage() {
-  return (
-    <section className="page-section repos-section">
-      <div className="container">
-        <h2>Repositories</h2>
-        <p className="section-desc">Check out my projects on GitHub</p>
-        <div className="repos-grid">
-          <div className="repo-card">
-            <div className="repo-header">
-              <h3>
-                <i className="fas fa-folder"></i> my-ecommerce-
-              </h3>
+        <div className="tech-logos-section">
+          <p className="tech-logos-label">Technologies I use</p>
+          <div className="tech-logos-grid">
+            {[...techLogosFrontend, ...techLogosBackend].map((tech, index) => (
               <a
-                href="https://github.com/UdinGanteng256/my-ecommerce-"
+                key={index}
+                href={tech.href}
                 target="_blank"
                 rel="noreferrer"
-                className="repo-link"
+                className="tech-logo-item"
+                title={tech.title}
               >
-                <i className="fas fa-external-link-alt"></i>
+                {tech.node}
               </a>
-            </div>
-            <p>E-commerce project built with JavaScript</p>
-            <div className="repo-footer">
-              <span className="repo-lang">
-                <i className="fas fa-circle"></i> JavaScript
-              </span>
-              <span className="repo-date">Feb 21, 2026</span>
-            </div>
+            ))}
           </div>
-          <div className="repo-card">
-            <div className="repo-header">
-              <h3>
-                <i className="fas fa-folder"></i> Rich-in-The-Dungeon-pt-2
-              </h3>
-              <a
-                href="https://github.com/UdinGanteng256/Rich-in-The-Dungeon-pt-2"
-                target="_blank"
-                rel="noreferrer"
-                className="repo-link"
-              >
-                <i className="fas fa-external-link-alt"></i>
-              </a>
-            </div>
-            <p>GIMJAMUTB 2026 - Dungeon Adventure Game</p>
-            <div className="repo-footer">
-              <span className="repo-lang">
-                <i className="fas fa-circle" style={{ color: "#68217a" }}></i>{" "}
-                C#
-              </span>
-              <span className="repo-date">Jan 30, 2026</span>
-            </div>
-          </div>
-          <div className="repo-card">
-            <div className="repo-header">
-              <h3>
-                <i className="fas fa-folder"></i> Kalkulator-Buku-Bazar
-              </h3>
-              <a
-                href="https://github.com/UdinGanteng256/Kalkulator-Buku-Bazar"
-                target="_blank"
-                rel="noreferrer"
-                className="repo-link"
-              >
-                <i className="fas fa-external-link-alt"></i>
-              </a>
-            </div>
-            <p>Book Store Calculator</p>
-            <div className="repo-footer">
-              <span className="repo-lang">
-                <i className="fas fa-circle" style={{ color: "#f7df1e" }}></i>{" "}
-                JavaScript
-              </span>
-              <span className="repo-date">Aug 12, 2025</span>
-            </div>
-          </div>
-          <div className="repo-card">
-            <div className="repo-header">
-              <h3>
-                <i className="fas fa-folder"></i> Belanja_Sembako
-              </h3>
-              <a
-                href="https://github.com/UdinGanteng256/Belanja_Sembako"
-                target="_blank"
-                rel="noreferrer"
-                className="repo-link"
-              >
-                <i className="fas fa-external-link-alt"></i>
-              </a>
-            </div>
-            <p>HTML Grocery Shopping Template</p>
-            <div className="repo-footer">
-              <span className="repo-lang">
-                <i className="fas fa-circle" style={{ color: "#e34c26" }}></i>{" "}
-                HTML
-              </span>
-              <span className="repo-date">Oct 3, 2024</span>
-            </div>
-          </div>
-        </div>
-        <div className="github-stats">
-          <a
-            href="https://github.com/UdinGanteng256"
-            target="_blank"
-            rel="noreferrer"
-            className="github-profile-btn"
-          >
-            <i className="fab fa-github"></i> View Full GitHub Profile
-          </a>
         </div>
       </div>
     </section>
   );
 }
 
-/* =========================================
-   Games Page
-   ========================================= */
-function GamesPage() {
-  return (
-    <section className="page-section games-section">
-      <div className="container">
-        <div className="section-header">
-          <h2>Our Games</h2>
-          <p className="section-subtitle">
-            Games I&apos;ve built &amp; shipped
-          </p>
-        </div>
-
-        {/* Game Banner — Rich in The Dungeon */}
-        <div className="game-banner">
-          <div className="game-banner-visual">
-            <div className="game-banner-glow" />
-            <div className="game-banner-grid" />
-            <i className="fas fa-dungeon" />
-          </div>
-          <div className="game-banner-info">
-            <div className="game-tags">
-              <span className="game-tag">Dungeon Crawler</span>
-              <span className="game-tag">Unity</span>
-              <span className="game-tag">C#</span>
-              <span className="game-tag">Jam Entry</span>
-            </div>
-            <h3 className="game-banner-title">Rich in The Dungeon</h3>
-            <p className="game-banner-desc">
-              A dungeon crawler adventure built in 48 hours for GIMJAMUTB 2026.
-              Navigate procedural rooms, defeat enemies, and collect loot to
-              survive the depths — featuring hand-crafted mechanics and original
-              level design.
-            </p>
-            <div className="game-banner-meta">
-              <span>
-                <i className="fas fa-user"></i>&nbsp;Solo Dev
-              </span>
-              <span>
-                <i className="fas fa-calendar-alt"></i>&nbsp;Jan 2026
-              </span>
-              <span>
-                <i className="fas fa-trophy"></i>&nbsp;GIMJAMUTB 2026
-              </span>
-            </div>
-            <a
-              href="https://cecep271.itch.io/ritd"
-              target="_blank"
-              rel="noreferrer"
-              className="game-play-btn"
-            >
-              <i className="fas fa-play"></i>&nbsp; Play on itch.io
-            </a>
-          </div>
-        </div>
-
-        {/* More games coming soon */}
-        <div className="games-coming-soon">
-          <i className="fas fa-code"></i>
-          <p>More games in development — stay tuned.</p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* =========================================
-   3D Models Page
-   ========================================= */
-function ModelsPage() {
-  return (
-    <section className="page-section models-section">
-      <div className="container">
-        <div className="section-header">
-          <h2>3D Models</h2>
-          <p className="section-subtitle">
-            Interactive 3D assets &amp; game models
-          </p>
-        </div>
-        <div className="models-grid">
-          <ModelViewer
-            modelUrl="/models/duck.glb"
-            title="Classic Duck Model"
-            description="A classic 3D test model rendered in real-time. Demonstrates PBR materials, lighting, and shadow rendering. Drag to rotate, scroll to zoom."
-            environment="city"
-            height="350px"
-          />
-          <ModelViewer
-            modelUrl="/models/sphere.glb"
-            title="Material Showcase"
-            description="High-detail 3D model showcasing material variants and surface details. Perfect example of production-ready game assets with optimized topology."
-            environment="sunset"
-            height="350px"
-          />
-          <ModelViewer
-            modelUrl="/models/box.glb"
-            title="Simple Geometry"
-            description="Clean, low-poly cube demonstrating efficient topology. Perfect example of modular game assets that can be combined to create complex environments."
-            environment="night"
-            height="350px"
-          />
-        </div>
-        <div className="models-note">
-          <i className="fas fa-info-circle"></i>
-          <p>
-            <strong>These are free CC0 models</strong> from the{" "}
-            <a
-              href="https://github.com/KhronosGroup/glTF-Sample-Models"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Khronos Group Sample Models
-            </a>
-            . Want to add your own? Export from Blender/Maya as .glb, place in{" "}
-            <code>/public/models/</code>, and update the modelUrl prop. Find
-            more free models at{" "}
-            <a href="https://polyhaven.com" target="_blank" rel="noreferrer">
-              Poly Haven
-            </a>
-            ,{" "}
-            <a href="https://kenney.nl/assets" target="_blank" rel="noreferrer">
-              Kenney.nl
-            </a>
-            , or{" "}
-            <a href="https://sketchfab.com" target="_blank" rel="noreferrer">
-              Sketchfab
-            </a>
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* =========================================
-   Contact Page
-   ========================================= */
 function ContactPage() {
   return (
     <section className="page-section contact-section">
@@ -607,30 +334,27 @@ function ContactPage() {
             Available for freelance projects and collaborations
           </p>
         </div>
+
         <div className="contact-content">
           <p className="contact-description">
             Have an idea in mind? Let's build something extraordinary. Reach out
             and I'll get back to you as soon as possible.
           </p>
+
           <div className="contact-links">
-            <a href="mailto:muhammadpathih@gmail.com" className="contact-card">
+            <a
+              href="mailto:muhammadpathih@gmail.com"
+              className="contact-card"
+            >
               <div className="contact-icon">
-                <i className="fas fa-envelope"></i>
+                <Mail size={20} />
               </div>
               <div className="contact-info">
                 <span className="contact-label">Email</span>
                 <span className="contact-value">muhammadpathih@gmail.com</span>
               </div>
             </a>
-            <a href="tel:+6281292520891" className="contact-card">
-              <div className="contact-icon">
-                <i className="fas fa-phone"></i>
-              </div>
-              <div className="contact-info">
-                <span className="contact-label">Phone</span>
-                <span className="contact-value">+62 812-9252-0891</span>
-              </div>
-            </a>
+
             <a
               href="https://instagram.com/fortune.tihh"
               target="_blank"
@@ -638,13 +362,14 @@ function ContactPage() {
               className="contact-card"
             >
               <div className="contact-icon">
-                <i className="fab fa-instagram"></i>
+                <SiInstagram size={20} />
               </div>
               <div className="contact-info">
                 <span className="contact-label">Instagram</span>
                 <span className="contact-value">@fortune.tihh</span>
               </div>
             </a>
+
             <a
               href="https://github.com/UdinGanteng256"
               target="_blank"
@@ -652,7 +377,7 @@ function ContactPage() {
               className="contact-card"
             >
               <div className="contact-icon">
-                <i className="fab fa-github"></i>
+                <SiGithub size={20} />
               </div>
               <div className="contact-info">
                 <span className="contact-label">GitHub</span>
@@ -660,12 +385,13 @@ function ContactPage() {
               </div>
             </a>
           </div>
+
           <a
             href="mailto:muhammadpathih@gmail.com"
             className="cta-button contact-cta"
           >
             <span>Get in Touch</span>
-            <i className="fas fa-arrow-right"></i>
+            <ArrowRight size={16} />
           </a>
         </div>
       </div>
@@ -673,13 +399,12 @@ function ContactPage() {
   );
 }
 
-/* =========================================
-   Main App
-   ========================================= */
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
   const [pageKey, setPageKey] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const navigateTo = (page) => {
     if (page === currentPage) return;
@@ -689,7 +414,11 @@ function App() {
     window.scrollTo({ top: 0, behavior: "instant" });
   };
 
-  // Navbar entry animation
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+    document.documentElement.setAttribute('data-theme', isDarkMode ? 'light' : 'dark');
+  };
+
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
@@ -707,7 +436,6 @@ function App() {
     }
   }, []);
 
-  // Navbar scroll effect
   useEffect(() => {
     const handleScroll = () => {
       const navbar = document.querySelector(".navbar");
@@ -719,64 +447,106 @@ function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Music Player
   const toggleMusic = () => {
     const bgMusic = document.getElementById("bg-music");
-    const musicBtn = document.getElementById("music-toggle");
-    const musicInfo = document.querySelector(".music-info");
+    if (!bgMusic) return;
+
     if (bgMusic.paused) {
       bgMusic.play().catch(() => {});
-      musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
-      musicInfo.style.opacity = "1";
-      musicInfo.style.transform = "translateX(0)";
+      setIsPlaying(true);
     } else {
       bgMusic.pause();
-      musicBtn.innerHTML = '<i class="fas fa-music"></i>';
-      musicInfo.style.opacity = "0";
-      musicInfo.style.transform = "translateX(20px)";
+      setIsPlaying(false);
     }
   };
 
   return (
     <>
-      {/* Particle Background */}
-      <div
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100vw",
-          height: "100vh",
-          zIndex: -10,
-          pointerEvents: "none",
-        }}
-      >
-        <Antigravity
-          color={["#FF0000", "#FFFF00", "#00FF00", "#0000FF"]}
-          count={2000}
-          particleSize={0.2}
-          particleVariance={1.2}
-          waveAmplitude={2.2}
-        />
-      </div>
+      <nav className="navbar">
+        <div className="logo">fatihgateng01</div>
+        <div className="nav-right">
+          <ul className={`nav-links${mobileMenuOpen ? " mobile-open" : ""}`}>
+            <li>
+              <a
+                href="#about"
+                className={currentPage === "about" ? "active" : ""}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigateTo("about");
+                }}
+              >
+                About
+              </a>
+            </li>
+            <li>
+              <a
+                href="#tech-stack"
+                className={currentPage === "tech-stack" ? "active" : ""}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigateTo("tech-stack");
+                }}
+              >
+                Tech Stack
+              </a>
+            </li>
+            <li>
+              <a
+                href="#terminal"
+                className={currentPage === "terminal" ? "active" : ""}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigateTo("terminal");
+                }}
+              >
+                Terminal
+              </a>
+            </li>
+            <li>
+              <a
+                href="#contact"
+                className={currentPage === "contact" ? "active" : ""}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigateTo("contact");
+                }}
+              >
+                Contact
+              </a>
+            </li>
+          </ul>
+          <div
+            className={`hamburger${mobileMenuOpen ? " open" : ""}`}
+            onClick={() => setMobileMenuOpen((prev) => !prev)}
+            aria-label="Toggle navigation"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label="Toggle dark mode"
+          >
+            {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+        </div>
+      </nav>
 
-      {/* Custom Interactive Text Cursor */}
-      <TextCursor
-        text="asdfghjkzxcvbnmlopoiuytrewq1234567890"
-        spacing={80}
-        followMouseDirection
-        randomFloat
-        exitDuration={0.3}
-        removalInterval={20}
-        maxPoints={10}
-      />
-
-      {/* Music Player */}
       <div className="music-player">
         <button id="music-toggle" className="music-btn" onClick={toggleMusic}>
-          <i className="fas fa-music"></i>
+          {isPlaying ? (
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="10" y1="15" x2="10" y2="9"/><line x1="14" y1="15" x2="14" y2="9"/></svg>
+          ) : (
+            <Music size={16} />
+          )}
         </button>
-        <div className="music-info">
+        <div className={`music-info ${isPlaying ? 'visible' : ''}`} style={{
+          opacity: isPlaying ? 1 : 0,
+          transform: isPlaying ? 'translateX(0)' : 'translateX(20px)',
+          transition: 'all 0.35s ease'
+        }}>
           <span className="music-title">Chopin - Nocturne</span>
           <div className="music-visualizer">
             <span></span>
@@ -794,55 +564,20 @@ function App() {
         </audio>
       </div>
 
-      {/* Navigation */}
-      <nav className="navbar">
-        <div className="logo">fatihgateng01</div>
-        <ul className={`nav-links${mobileMenuOpen ? " mobile-open" : ""}`}>
-          {PAGES.map((page) => (
-            <li key={page}>
-              <a
-                href={`#${page}`}
-                className={currentPage === page ? "active" : ""}
-                onClick={(e) => {
-                  e.preventDefault();
-                  navigateTo(page);
-                }}
-              >
-                {PAGE_LABELS[page]}
-              </a>
-            </li>
-          ))}
-        </ul>
-        <div
-          className={`hamburger${mobileMenuOpen ? " open" : ""}`}
-          onClick={() => setMobileMenuOpen((prev) => !prev)}
-          aria-label="Toggle navigation"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </nav>
-
-      {/* Page Content — key triggers remount + fade-in animation */}
       <div className="page-wrapper" key={pageKey}>
         {currentPage === "home" && (
           <HomePage onGetInTouch={() => navigateTo("about")} />
         )}
-        {currentPage === "about" && <AboutPage />}
-        {currentPage === "tech-stack" && <TechStackPage />}
-        {currentPage === "repositories" && <RepositoriesPage />}
-        {currentPage === "games" && <GamesPage />}
-        {currentPage === "models" && <ModelsPage />}
+        {currentPage === "about" && <AboutPage isDarkMode={isDarkMode} />}
+        {currentPage === "tech-stack" && <TechStackPage isDarkMode={isDarkMode} />}
+        {currentPage === "terminal" && <Terminal />}
         {currentPage === "contact" && <ContactPage />}
       </div>
 
-      {/* Footer */}
       <footer>
-        <p>&copy; 2024 Aurion. All rights reserved.</p>
+        <p>2026 Muhammad Pathih. All rights reserved.</p>
       </footer>
 
-      {/* Quality Settings Toggle */}
       <QualityToggle />
     </>
   );

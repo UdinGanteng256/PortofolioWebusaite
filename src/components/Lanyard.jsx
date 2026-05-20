@@ -19,7 +19,8 @@ export default function Lanyard({
   position = [0, 0, 30],
   gravity = [0, -40, 0],
   fov = 20,
-  transparent = true
+  transparent = true,
+  isDarkMode = false
 }) {
   const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 768);
 
@@ -39,7 +40,7 @@ export default function Lanyard({
       >
         <ambientLight intensity={Math.PI} />
         <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
-          <Band isMobile={isMobile} />
+          <Band isMobile={isMobile} isDarkMode={isDarkMode} />
         </Physics>
         <Environment blur={0.75}>
           <Lightformer
@@ -76,7 +77,7 @@ export default function Lanyard({
   );
 }
 
-function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
+function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, isDarkMode = false }) {
   const band = useRef(null);
   const fixed = useRef(null);
   const j1 = useRef(null);
@@ -195,7 +196,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
             <mesh position={[0, 0.5, 0]}>
               <boxGeometry args={[1, 1.4, 0.02]} />
               <meshPhysicalMaterial
-                color="#FDF6E3"
+                color={isDarkMode ? "#111111" : "#FDF6E3"}
                 clearcoat={isMobile ? 0 : 1}
                 clearcoatRoughness={0.15}
                 roughness={0.5}
@@ -210,7 +211,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
             {/* Identity Strip */}
             <mesh position={[0, -0.1, 0.012]}>
               <boxGeometry args={[0.85, 0.15, 0.01]} />
-              <meshBasicMaterial color="#0F766E" />
+              <meshBasicMaterial color={isDarkMode ? "#a0a0a0" : "#0F766E"} />
             </mesh>
             {/* Mock Clip */}
             <mesh position={[0, 1.25, 0]}>
@@ -223,7 +224,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
       <mesh ref={band}>
         <meshLineGeometry />
         <meshLineMaterial
-          color="#319795"
+          color={isDarkMode ? "#a0a0a0" : "#319795"}
           depthTest={false}
           resolution={isMobile ? [1000, 2000] : [1000, 1000]}
           lineWidth={1}
